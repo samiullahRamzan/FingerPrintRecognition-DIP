@@ -2,7 +2,6 @@ import { Text, KeyboardAvoidingView, Platform } from "react-native";
 import { AddStudstyles, styles } from "../style/styles";
 import { TextField } from "../Components/textField";
 import React, { useState } from "react";
-import { AddStudentApi } from "../AxiosFetchAPIS/StudentApi's";
 import ButtonLarge from "../Components/ButtonLarge";
 import { GlobalContext } from "../StateManagement/GlobalProvider";
 
@@ -12,13 +11,9 @@ export default function AddStudent({ navigation }) {
   const [Phone, setPhone] = useState("");
   const [Email, setEmail] = useState("");
 
-  // state management
+  // state management used for display data on home screen
   const { GlobalSetName, GlobalSetStudentID, GlobalSetPhone, GlobalSetEmail } =
     React.useContext(GlobalContext);
-
-  const Add = () => {
-    AddStudentApi(Name, studentId, Email, Phone);
-  };
 
   // for phone number
   const handleTextChange = (newText) => {
@@ -82,10 +77,9 @@ export default function AddStudent({ navigation }) {
       />
 
       <ButtonLarge
-        head="Add"
+        head="Next"
         navigation={navigation}
         ChangeScreen={"ScanFinger"}
-        func={Add}
       />
     </KeyboardAvoidingView>
   );

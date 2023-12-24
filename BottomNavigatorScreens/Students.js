@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, Image } from "react-native";
 import { StudentsStyles } from "../style/styles";
 import { getStudentsApi } from "../AxiosFetchAPIS/StudentApi's";
 import { CustomText } from "../Components/CustomText";

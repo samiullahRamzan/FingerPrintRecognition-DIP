@@ -7,6 +7,7 @@ export const GlobalProvider = ({ children }) => {
   const [GlobalStudentId, GlobalSetStudentID] = React.useState("");
   const [GlobalPhone, GlobalSetPhone] = React.useState("");
   const [GlobalEmail, GlobalSetEmail] = React.useState("");
+  const [GlobalStudInfo, GlobalSetStudInfo] = React.useState("");
 
   return (
     <GlobalContext.Provider
@@ -19,6 +20,8 @@ export const GlobalProvider = ({ children }) => {
         GlobalSetPhone,
         GlobalEmail,
         GlobalSetEmail,
+        GlobalStudInfo,
+        GlobalSetStudInfo,
       }}
     >
       {children}

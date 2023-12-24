@@ -1,4 +1,6 @@
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import { GlobalContext } from "../StateManagement/GlobalProvider";
+import React, { useEffect } from "react";
 
 export default function ButtonLarge({
   head,
@@ -23,28 +25,21 @@ export default function ButtonLarge({
     fontSize: 20,
   };
 
-  if (head == "Add") {
-    return (
-      <TouchableOpacity
-        style={button}
-        onPress={() => {
-          func();
-          navigation.navigate(ChangeScreen);
-        }}
-      >
-        <Text style={text}>{head}</Text>
-      </TouchableOpacity>
-    );
-  } else {
-    return (
-      <TouchableOpacity
-        style={button}
-        onPress={() => {
-          navigation.navigate(ChangeScreen);
-        }}
-      >
-        <Text style={text}>{head}</Text>
-      </TouchableOpacity>
-    );
-  }
+  // "Next" is in add student screen, the purpose is that to check add student and existing student
+  const { GlobalSetStudInfo } = React.useContext(GlobalContext);
+
+  useEffect(() => {
+    GlobalSetStudInfo((prevState) => ({ ...prevState, info: head }));
+  }, []);
+
+  return (
+    <TouchableOpacity
+      style={button}
+      onPress={() => {
+        navigation.navigate(ChangeScreen);
+      }}
+    >
+      <Text style={text}>{head}</Text>
+    </TouchableOpacity>
+  );
 }

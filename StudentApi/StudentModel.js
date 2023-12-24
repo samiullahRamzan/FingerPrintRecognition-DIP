@@ -17,6 +17,10 @@ const StudentSchema = new mongoose.Schema({
     type: String,
     required: [true, "A student must have a phone"],
   },
+  image: {
+    type: String,
+    required: [true, "Must contain a fingerprint image"],
+  },
 });
 
 const Student = mongoose.model("Student", StudentSchema);

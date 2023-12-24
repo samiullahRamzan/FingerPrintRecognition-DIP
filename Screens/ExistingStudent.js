@@ -1,13 +1,23 @@
 import { Camera, CameraType } from "expo-camera";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ScannerStyles, styles } from "../style/styles";
-
+import { AddStudentApi } from "../AxiosFetchAPIS/StudentApi's";
 import { Button, Text, TouchableOpacity, View } from "react-native";
+import { GlobalContext } from "../StateManagement/GlobalProvider";
 
 export default function ExistingStudent({ navigation }) {
   const [camera, setCamera] = useState(null);
   const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
+
+  // we can know data student is existing or new student from this statment
+  const {
+    GlobalName,
+    GlobalEmail,
+    GlobalPhone,
+    GlobalStudentId,
+    GlobalStudInfo,
+  } = React.useContext(GlobalContext);
 
   if (!permission) {
     // Camera permissions are still loading
@@ -34,9 +44,15 @@ export default function ExistingStudent({ navigation }) {
 
   async function takePicture() {
     if (camera) {
-      const photo = await camera.takePictureAsync();
-      console.log("Photo taken:", photo);
-      // Handle the captured photo as needed (e.g., save to storage, send to server, etc.)
+      const Photo = await camera.takePictureAsync();
+      console.log("Photo taken:", Photo);
+      AddStudentApi(
+        GlobalName.name,
+        GlobalStudentId.id,
+        GlobalEmail.email,
+        GlobalPhone.phone,
+        Photo.uri
+      );
     }
     navigation.navigate("Advanced LMS");
   }
